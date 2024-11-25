@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarFile</title>
+    <link rel="stylesheet" href="css/principal.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Botão para abrir o menu em telas pequenas -->
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <!-- Barra Lateral -->
+        <aside class="sidebar">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/80" alt="Foto de Perfil" class="user-photo">
+                <div class="user-details">
+                    <p class="user-name">Nome</p>
+                    <p class="user-role">Administrador</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#resumo" class="btn-nav">Início</a>
+                <a href="#recentes" class="btn-nav">Atividades Recentes</a>
+                <a href="pastas.html" class="btn-nav">Arquivos Gerais</a>
+                <a href="#" class="btn-nav">Arquivos Pessoais</a>
+                <a href="#graficos" class="btn-nav">Configurar Pastas</a>
+                <a href="index.html" class="btn-nav btn-logout">Sair</a>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <header class="dashboard-header">
+                <h2>SolarFile</h2>
+            </header>
+            
+            <!-- Conteúdo adicional -->
+            <div class="content">
+                
+            </div>
+
+            <!-- Rodapé -->
+            <footer class="dashboard-footer">
+                <p>© <span id="year"></span> Sistema de Gerenciamento. Todos os direitos reservados.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Atualizar ano no rodapé
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Alternar visibilidade do menu em telas pequenas
+        function toggleMenu() {
+            console.log('Botão clicado!'); // Verifique se esta mensagem aparece no console
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Fechar o menu se clicar fora da barra lateral
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            // Verifica se o clique foi fora do menu e do botão de alternância
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

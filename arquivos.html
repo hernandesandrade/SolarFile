@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarFile</title>
+    <link rel="stylesheet" href="css/arquivos.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Botão para abrir o menu em telas pequenas -->
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <!-- Barra Lateral -->
+        <aside class="sidebar">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/80" alt="Foto de Perfil" class="user-photo">
+                <div class="user-details">
+                    <p class="user-name">Nome</p>
+                    <p class="user-role">Administrador</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="principal.html" class="btn-nav">Início</a>
+                <a href="#recentes" class="btn-nav">Atividades Recentes</a>
+                <a href="#graficos" class="btn-nav">Arquivos Gerais</a>
+                <a href="pastas.html" class="btn-nav">Arquivos Pessoais</a>
+                <a href="#graficos" class="btn-nav">Configurar Pastas</a>
+                <a href="index.html" class="btn-nav btn-logout">Sair</a>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <header class="dashboard-header">
+                <h2>SolarFile</h2>
+            </header>
+
+            <!-- Botões de Voltar e Adicionar Novo Arquivo -->
+            <div class="action-buttons">
+                <button class="btn-back">Voltar</button>
+                <button class="btn-add">Adicionar Novo Arquivo</button>
+            </div>
+
+            <!-- Barra de Pesquisa -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Pesquisar Documentos..." onkeyup="filterDocuments()">
+            </div>
+
+            <div class="tabela">
+                <table id="documentsTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Peso</th>
+                            <th>Data Última Atualização</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="documentsList">
+                        <tr>
+                            <td>Documento 1</td>
+                            <td>1.2MB</td>
+                            <td>25/11/2024</td>
+                            <td>
+                                <button class="btn-update">Atualizar</button>
+                                <button class="btn-download">Baixar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Documento 2</td>
+                            <td>3.5MB</td>
+                            <td>20/11/2024</td>
+                            <td>
+                                <button class="btn-update">Atualizar</button>
+                                <button class="btn-download">Baixar</button>
+                            </td>
+                        </tr>
+                        <!-- Mais documentos aqui -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Lista de Documentos -->
+            
+
+            <!-- Rodapé -->
+            <footer class="dashboard-footer">
+                <p>© <span id="year"></span> Sistema de Gerenciamento. Todos os direitos reservados.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Atualizar ano no rodapé
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Alternar visibilidade do menu em telas pequenas
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Fechar o menu se clicar fora da barra lateral
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Função para filtrar documentos
+        function filterDocuments() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.getElementById('documentsList').getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let documentName = cells[0].textContent.toLowerCase();
+                
+                if (documentName.indexOf(searchInput) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
